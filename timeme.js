@@ -248,19 +248,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				TimeMe.startTimer();
 			},
 
-			triggerUserHasLeftPage: function () {
-				if (TimeMe.active) {
-					for (var i = 0; i < this.userLeftCallbacks.length; i++) {
-						var userHasLeftCallback = this.userLeftCallbacks[i];
-						var numberTimes = userHasLeftCallback.numberOfTimesToInvoke;
-						if (isNaN(numberTimes) || (numberTimes === undefined) || numberTimes > 0) {
-							userHasLeftCallback.numberOfTimesToInvoke -= 1;
-							userHasLeftCallback.callback();
-						}
-					}
-				}
-				TimeMe.stopAllTimers();
-			},
+			// triggerUserHasLeftPage: function () {
+			// 	if (TimeMe.active) {
+			// 		for (var i = 0; i < this.userLeftCallbacks.length; i++) {
+			// 			var userHasLeftCallback = this.userLeftCallbacks[i];
+			// 			var numberTimes = userHasLeftCallback.numberOfTimesToInvoke;
+			// 			if (isNaN(numberTimes) || (numberTimes === undefined) || numberTimes > 0) {
+			// 				userHasLeftCallback.numberOfTimesToInvoke -= 1;
+			// 				userHasLeftCallback.callback();
+			// 			}
+			// 		}
+			// 	}
+			// 	TimeMe.stopAllTimers();
+			// },
 
 			callAfterTimeElapsedInSeconds: function (timeInSeconds, callback) {
 				TimeMe.timeElapsedCallbacks.push({
@@ -279,7 +279,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				}
 				if (TimeMe.idle === false && TimeMe.currentIdleTimeMs > TimeMe.idleTimeoutMs) {
 					TimeMe.idle = true;
-					TimeMe.triggerUserHasLeftPage();
+					// TimeMe.triggerUserHasLeftPage();
 				} else {
 					TimeMe.currentIdleTimeMs += TimeMe.checkStateRateMs;
 				}
@@ -306,14 +306,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 				document.addEventListener(TimeMe.visibilityChangeEventName, function () {
 					if (document[TimeMe.hiddenPropName]) {
-						TimeMe.triggerUserHasLeftPage();
+						// TimeMe.triggerUserHasLeftPage();
 					} else {
 						TimeMe.triggerUserHasReturned();						
 					}
 				}, false);
 
 				window.addEventListener('blur', function () {
-					TimeMe.triggerUserHasLeftPage();
+					// TimeMe.triggerUserHasLeftPage();
 				});
 
 				window.addEventListener('focus', function () {
